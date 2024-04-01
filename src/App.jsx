@@ -1,12 +1,14 @@
-import './App.css'
+import Sidebar from './components/Sidebar'
+import PopulationData from './components/PopulationData'
+import CryptoPrices from './components/CryptoPrices'
 
 function App() {
 
   return (
     <>
-      <div className=''>
-        Hello World
-      </div>
+      <Sidebar/>
+      {/* <PopulationData/> */}
+      <CryptoPrices/>
     </>
   )
 }
