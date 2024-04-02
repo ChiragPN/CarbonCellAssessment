@@ -7,6 +7,12 @@ const CryptoPrices = () => {
   const [bitcoinData, setBitcoinData] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const currencySymbols = {
+    USD: '$',
+    GBP: '£',
+    EUR: '€',
+  };
+
   useEffect(() => {
     const fetchData = async () => {
         await axios.get('https://api.coindesk.com/v1/bpi/currentprice.json')
@@ -19,38 +25,43 @@ const CryptoPrices = () => {
   }, []);
 
   return (
-    <div className='container p-4'>
-      {/* <h1>CryptoCurrencies</h1> */}
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        bitcoinData && (
-          <div className='card w-1/4 border rounded-lg'>
-            <ul>
-              <div className='bg-zinc-500 rounded-lg m-4 mb-2'>
-                <div className='flex flex-col items-center justify-center'>
-                  <img src={bitcoin} alt="Bitcoin" className='w-32 m-4' />
-                  <p className='text-2xl text-center'>{bitcoinData.chartName}</p>
-                  <p className='text-2xl'>(BTC)</p>
+    <>
+      <h1 className='text-2xl py-0 my-2 p-4'>CryptoCurrency Prices</h1>
+      <div className='container flex flex-wrap m-4 gap-6 w-fit'>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          bitcoinData && (
+            <div className='card bg-CustomGray drop-shadow-2xl w-auto rounded-lg'>
+                <div className='flex justify-start items-center space-x-6 p-4 mx-2'>
+                  <img src={bitcoin} alt="Bitcoin" className='w-10 drop-shadow-xl' />
+                  <p className='text-lg'>BTC</p>
                 </div>
-              </div>
-              {Object.keys(bitcoinData.bpi).map(currency => (
-                <li key={currency}>
-                  <div className='flex justify-between font-bold m-3'>
+                
+              <p className='text-xl mx-4 mb-4'>{bitcoinData.chartName}</p>
+
+              <div>
+                {Object.keys(bitcoinData.bpi).map(currency => (
+                  <div key={currency} className='flex justify-between gap-14 items-center font-bold mx-4 mb-2'>
                     <p>{bitcoinData.bpi[currency].rate}</p>
-                    <p>{bitcoinData.bpi[currency].symbol}</p>
+                    <div className='flex justify-center items-center space-x-2'>
+                      <p className='text-xs'>{bitcoinData.bpi[currency].code}</p>
+                      <p>({currencySymbols[currency]})</p>
+                      {/* <p>{bitcoinData.bpi[currency].symbol}</p> */}
+                    </div>
                   </div>
-                </li>
-              ))}
-            </ul>
-            <div className='footer flex justify-between m-3 mb-0 py-4'>
-              <button className='px-3 py-1 bg-green-600 text-white rounded'>Trade</button>
-              <img src={info} alt="info" className='cursor-pointer' />
+                ))}
+              </div>
+              
+              <div className='footer flex justify-between mx-4 m-2 mb-0 py-4'>
+                <button className='px-3 py-1 w-[45%] font-medium bg-LightBlue text-white rounded'>Buy</button>
+                <button className='px-3 py-1 w-[45%] font-medium bg-[#ff3333] text-white rounded'>Sell</button>
+              </div>
             </div>
-          </div>
-        )
-      )}
-    </div>
+          )
+        )}
+      </div>
+    </>
   );
 };
 

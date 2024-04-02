@@ -12,7 +12,7 @@ function PopulationData() {
         title: {
           display: true,
           text: "Years",
-          color: 'black',
+          color: 'white',
           font: {
             size: 15,
           },
@@ -25,7 +25,7 @@ function PopulationData() {
         title: {
           display: true,
           text: "Population",
-          color: 'black',
+          color: 'white',
           font: {
             size: 15,
           },
@@ -48,12 +48,12 @@ function PopulationData() {
         font: {
           size: 25,
         },
-        color: "black"
+        color: "white"
       },
       legend: {
         align: "end",
         labels: {
-          color: "black",
+          color: "white",
           font: {
             size: 15,
           },
@@ -74,8 +74,8 @@ function PopulationData() {
           label: "United States",
           data: data.data.map(item => item.Population),
           fill: false,
-          borderColor: "rgb(255, 92, 132)",
-          backgroundColor: "rgba(255, 92, 132, 0.3)",
+          borderColor: "LightBlue",
+          backgroundColor: "LightBlue",
           borderWidth: 2,
         }],
       })
@@ -85,8 +85,8 @@ function PopulationData() {
   }, [])
 
   return (
-    <div className='container mx-6 my-4'>
-      <div className="graph w-[60%] h-[60%] p-4 border-2 rounded-lg">
+    <div className='container mx-4 pt-2 md:w-full w-fit'>
+      <div className="graph bg-CustomGray p-4 rounded-lg w-full h-[70vh]">
         {chartData && chartData.datasets && (
           <Line
             data={chartData}
