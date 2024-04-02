@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import bitcoin from '../assets/icons/bitcoin.svg';
-import info from '../assets/icons/info.svg';
 import axios from 'axios';
 
 const CryptoPrices = () => {
